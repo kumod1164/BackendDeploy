@@ -1,5 +1,5 @@
 const express = require("express");
-const { EmployeeModel } = require("../models/employee.model.js");
+const { EmployeeModel } = require("../models/employee.model");
 const employeeController = express.Router();
 
 employeeController.get("/", async (req, res) => {
