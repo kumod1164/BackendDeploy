@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-const employeeSchema = mongoose.schema({
-    first_name: String,
-    Last_name:String,
-    email:{type:String, required: true},
-    salary:String,
-    date: String
-})
+const employeeSchema = mongoose.Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  department: {
+    type: String,
+    required: true,
+    enum: ["Tech", "Marketing", "Operations"],
+  },
+  salary: { type: Number, required: true },
+});
 
-const employeeModel= mongoose.model("employee", employeeSchema)
+const EmployeeModel = mongoose.model("employee", employeeSchema);
 
-module.exports = {employeeModel};
+module.exports = { EmployeeModel };
