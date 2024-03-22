@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
-require("dotenv").config();
 
-const userSchema = mongoose.Schema({
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-});
+const userSchema  = new mongoose.Schema({
+    name: {type:String, required:true},
+    email: {type:String, required:true},
+    password : {type:String, required:true},
+})
 
-const UserModel = mongoose.model("user", userSchema);
+const UserModel = mongoose.model("user", userSchema)
 
-module.exports = { UserModel };
+module.exports={
+    UserModel
+}

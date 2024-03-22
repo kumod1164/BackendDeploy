@@ -1,32 +1,32 @@
-const express = require("express");
-const cors = require("cors");
-const { connection } = require("./configs/db");
-const { userController } = require("./controllers/user.routes");
-const { authentication } = require("./middlewares/authentication");
-const { employeeController } = require("./controllers/employee.routes");
+const express = require("express")
+const {userController} = require("./routes/user.routes")
+const {flightController} = require("./routes/flights.routes")
+
+const {connection} = require("./configs/db");
+const { auth } = require("./middlewares/auth");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
-app.use(cors());
+
+
+const PORT = 8080;
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "server is running" });
-});
+app.get("/", (req,res)=>{
+    res. send("Dashboard")
+})
 
 app.use("/user", userController);
+app.use(auth)
 
-app.use(authentication);
 
-app.use("/employee", employeeController);
+app.use("/flight",flightController)
 
-app.listen(PORT, async () => {
-  try {
-    await connection;
-    console.log("DB is connected");
-  } catch (error) {
-    console.log("Error while connection to db");
-    console.log(error);
-  }
-  console.log("server is running");
-});
+app.listen(PORT,async()=>{
+    try {
+        await connection;
+        console.log("Connected to DB")
+    } catch (error) {
+        console.log(error)
+    }
+    console.log(`Listening on PORT ${PORT}`)
+})
